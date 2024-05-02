@@ -5,9 +5,9 @@ const HomePage = () => {
   return (
     <div>
       <h1>Home page</h1>
-      <Button variant="text">Text</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
+      <Button >Text</Button>
+      <Button >Contained</Button>
+      <Button >Outlined</Button>
     </div>
   );
 };

@@ -20,7 +20,6 @@ const HeroSection = () => {
       >
         <Box
           sx={{
-            border: "1px solid red",
             width: "700px",
             position: "absolute",
             top: "-90px",

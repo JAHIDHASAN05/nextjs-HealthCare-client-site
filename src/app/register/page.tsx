@@ -17,10 +17,10 @@ const Register = () => {
     <Container>
       <Stack
         sx={{
+            height : '100vh',
           justifyContent: "center",
           alignItems: "center",
         }}
-        my={5}
       >
         <Box
           sx={{

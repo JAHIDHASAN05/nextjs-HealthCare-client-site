@@ -52,8 +52,8 @@ const Specialties = async () => {
             </Stack>
             <Stack direction={'row'} justifyContent={'center'} mb={3}>
             <Button variant="outlined"> View All</Button>
-
             </Stack>
+
         </Container>
     );
 };

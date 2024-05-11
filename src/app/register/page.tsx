@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerPatient } from "@/service/actions/registerPatient";
+import {  Toaster, toast } from "sonner";
 
 const Register = () => {
 
@@ -43,31 +44,26 @@ const Register = () => {
 
       try{
         const result = await registerPatient(data)
-         console.log(result);
+        console.log(result, "tows5t");
+
+        if(result.success){
+
+          toast.success(result.message)
+        }
       }
       catch(err){
-       
+       console.log(err);
       }
 
-    //   console.log(data)
-    // fetch(`http://localhost:5000/api/v1/user/create-patient`,{
-    //    method : "POST", 
-    //    headers :{
-    //     'content-type' : 'application/json'
-    //    },
-    //    body: JSON.stringify(data)
-
-    // })
-    // .then(res=> console.log(res))
-    // .catch(err=>{
-    //   console.log(err,"err")
-    // })
+   
   }
 
 
 
   return (
     <Container>
+            
+
       <Stack
         sx={{
             height : '100vh',

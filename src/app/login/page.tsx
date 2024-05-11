@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Logo from "@/assets/svgs/logo.svg";
+import { loginUser } from "@/service/actions/loginUser";
 
 
 
@@ -39,7 +40,10 @@ const {
   watch,
   formState: { errors },
 } = useForm<Inputs>()
-const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+const onSubmit: SubmitHandler<Inputs> = async(data) => {
+   const result = await loginUser(data)
+   console.log(result.data.accessToken);
+  }
 
 
 

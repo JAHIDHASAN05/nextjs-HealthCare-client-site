@@ -1,3 +1,5 @@
+
+ 'use client'
 import {
   Box,
   Button,
@@ -7,11 +9,42 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useForm, SubmitHandler } from "react-hook-form"
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Logo from "@/assets/svgs/logo.svg";
+
+
+
+
+
+type Inputs = {
+  example: string
+  exampleRequired: string
+}
 const Login = () => {
+
+  type Inputs = {
+  email: string;
+  password:string;
+  exampleRequired: string;
+}
+
+
+const {
+  register,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Inputs>()
+const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+
+
+
+
+
   return (
     <Container>
       <Stack
@@ -46,7 +79,7 @@ const Login = () => {
               </Typography>
             </Box>
             <Box>
-              <form action="">
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid container spacing={2}>
                   <Grid item md={6} mt={2}>
                     <TextField
@@ -56,6 +89,7 @@ const Login = () => {
                       label="Email"
                       type="email"
                       id="fullWidth"
+                      {...register("email")}
                     />
                   </Grid>
                   <Grid item md={6} mt={2}>
@@ -66,6 +100,8 @@ const Login = () => {
                       type="password"
                       label="Password"
                       id="fullWidth"
+                      {...register("password")}
+
                     />
                   </Grid>
                 </Grid>
@@ -75,7 +111,7 @@ const Login = () => {
                 </Typography>
 
                 <Box my={2}>
-                  <Button fullWidth>REGISTER</Button>
+                  <Button fullWidth type="submit">Loign</Button>
                   <Typography mt={1} component={"p"} fontWeight={500}>
                     Don&lsquo;t have an account?
                     <Link href={"/register"}> Create an account</Link>

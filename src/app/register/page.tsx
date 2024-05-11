@@ -1,3 +1,4 @@
+ 'use client'
 import {
   Box,
   Button,
@@ -11,8 +12,60 @@ import Image from "next/image";
 import React from "react";
 import Logo from "@/assets/svgs/logo.svg";
 import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form"
+import { modifyPayload } from "@/utils/modifyPayload";
+import { registerPatient } from "@/service/actions/registerPatient";
 
 const Register = () => {
+
+  interface IPatientData {
+    name:string;
+    email: string;
+    contactNumber: string;
+    address: string
+  }
+
+
+  interface IPatientRegisterFormData {
+    password :string;
+    patient:IPatientData;
+  }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<IPatientRegisterFormData>()
+  const onSubmit: SubmitHandler<IPatientRegisterFormData> = async(values) => {
+    console.log(values);
+      const data= modifyPayload(values)
+
+      try{
+        const result = await registerPatient(data)
+         console.log(result);
+      }
+      catch(err){
+       
+      }
+
+    //   console.log(data)
+    // fetch(`http://localhost:5000/api/v1/user/create-patient`,{
+    //    method : "POST", 
+    //    headers :{
+    //     'content-type' : 'application/json'
+    //    },
+    //    body: JSON.stringify(data)
+
+    // })
+    // .then(res=> console.log(res))
+    // .catch(err=>{
+    //   console.log(err,"err")
+    // })
+  }
+
+
+
   return (
     <Container>
       <Stack
@@ -47,7 +100,7 @@ const Register = () => {
               </Typography>
             </Box>
             <Box>
-             <form action="">
+             <form onSubmit={handleSubmit(onSubmit)}>
              <Grid container spacing={2}>
                 <Grid item md={12} mt={1}>
                   <TextField
@@ -56,6 +109,7 @@ const Register = () => {
                     size="small"
                     label="Name"
                     id="fullWidth"
+                    {...register("patient.name")}
                   />
                 </Grid>
                 <Grid item md={6} mt={1}>
@@ -66,6 +120,8 @@ const Register = () => {
                     label="Email"
                     type="email"
                     id="fullWidth"
+                    {...register("patient.email")}
+
                   />
                 </Grid>
                 <Grid item md={6} mt={1}>
@@ -76,6 +132,8 @@ const Register = () => {
                     type="password"
                     label="Password"
                     id="fullWidth"
+                    {...register("password")}
+
                   />
                 </Grid>
                 <Grid item md={6} mt={1}>
@@ -86,6 +144,8 @@ const Register = () => {
                     type="tel"
                     label="Contact-Number"
                     id="fullWidth"
+                    {...register("patient.contactNumber")}
+
                   />
                 </Grid>
                 <Grid item md={6} mt={1}>
@@ -95,11 +155,13 @@ const Register = () => {
                     size="small"
                     label="Address"
                     id="fullWidth"
+                    {...register("patient.address")}
+
                   />
                 </Grid>
               </Grid>
               <Box my={2}>
-                <Button fullWidth>REGISTER</Button>
+                <Button type="submit" fullWidth>REGISTER</Button>
 
                 <Typography mt={1} component={"p"} fontWeight={500}>
                   Do you already have an account?

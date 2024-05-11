@@ -16,8 +16,11 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerPatient } from "@/service/actions/registerPatient";
 import {  Toaster, toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
+
+  const router= useRouter()
 
   interface IPatientData {
     name:string;
@@ -48,7 +51,9 @@ const Register = () => {
 
         if(result.success){
 
+
           toast.success(result.message)
+          router.push('/login')
         }
       }
       catch(err){

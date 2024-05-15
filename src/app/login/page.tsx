@@ -17,6 +17,8 @@ import React from "react";
 import Logo from "@/assets/svgs/logo.svg";
 import { loginUser } from "@/service/actions/loginUser";
 import { storeUserInfo } from "@/service/actions/auth.services";
+import { toast } from "sonner";
+import {  useRouter } from "next/navigation";
 
 
 
@@ -34,6 +36,7 @@ const Login = () => {
   exampleRequired: string;
 }
 
+const router= useRouter()
 
 const {
   register,
@@ -44,9 +47,10 @@ const {
 const onSubmit: SubmitHandler<Inputs> = async(data) => {
    const result = await loginUser(data)
   if(result?.data?.accessToken){
-    // console.log(result?.data?.accessToken);
+    toast.success(result.message)
        
    storeUserInfo({accessToken:result?.data?.accessToken})
+   router.push('/')
   }
    }
 

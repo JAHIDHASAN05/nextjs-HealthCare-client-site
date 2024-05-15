@@ -1,6 +1,6 @@
 import { authKey } from "@/constans"
 import { decodedToken } from "@/utils/jwt";
-import { getFromLocalStorage, setToLocalStorage } from "@/utils/local.storage"
+import { getFromLocalStorage, removeFromLocalStorage, setToLocalStorage } from "@/utils/local.storage"
 
 export const storeUserInfo=({accessToken}:{accessToken:string})=>{
 
@@ -24,4 +24,8 @@ export const  isLoggedIn=()=>{
     const authToken=getFromLocalStorage(authKey)
         return !!authToken;
 
+}
+
+export const removerUser=()=>{
+  return removeFromLocalStorage(authKey)
 }

@@ -7,7 +7,7 @@ export const setToLocalStorage=(key:string, value:string):any=>{
 }
 
 
-// export const getFromLocalStorage=(key:string)=>{
-//     if(!key || typeof window)
-//     return localStorage.getItem(key)
-// }
+export const getFromLocalStorage=(key:string)=>{
+    if(!key || typeof window)
+    return localStorage.getItem(key)
+}

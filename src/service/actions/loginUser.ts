@@ -11,6 +11,5 @@ export const loginUser=async(data:any)=>{
 
   })
   const loginInfo= res.json()
-
   return loginInfo
 }

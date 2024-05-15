@@ -16,6 +16,7 @@ import Link from "next/link";
 import React from "react";
 import Logo from "@/assets/svgs/logo.svg";
 import { loginUser } from "@/service/actions/loginUser";
+import { storeUserInfo } from "@/service/actions/auth.services";
 
 
 
@@ -42,8 +43,12 @@ const {
 } = useForm<Inputs>()
 const onSubmit: SubmitHandler<Inputs> = async(data) => {
    const result = await loginUser(data)
-   console.log(result.data.accessToken);
+  if(result?.data?.accessToken){
+    // console.log(result?.data?.accessToken);
+       
+   storeUserInfo({accessToken:result?.data?.accessToken})
   }
+   }
 
 
 

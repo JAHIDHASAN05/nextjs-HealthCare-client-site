@@ -17,6 +17,8 @@ import { modifyPayload } from "@/utils/modifyPayload";
 import { registerPatient } from "@/service/actions/registerPatient";
 import {  Toaster, toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { loginUser } from "@/service/actions/loginUser";
+import { storeUserInfo } from "@/service/actions/auth.services";
 
 const Register = () => {
 
@@ -44,16 +46,19 @@ const Register = () => {
   const onSubmit: SubmitHandler<IPatientRegisterFormData> = async(values) => {
     console.log(values);
       const data= modifyPayload(values)
+      console.log(data, 'register data');
 
       try{
         const result = await registerPatient(data)
         console.log(result, "tows5t");
-
         if(result.success){
-
-
           toast.success(result.message)
-          router.push('/login')
+          const Loginresult = await loginUser({password:values.password , email:result.data.email});
+          console.log(Loginresult,'loging res');
+          if (Loginresult?.data?.accessToken) {
+            storeUserInfo({ accessToken:Loginresult?.data?.accessToken });
+            router.push("/");
+          }     
         }
       }
       catch(err){

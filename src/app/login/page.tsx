@@ -1,5 +1,4 @@
-
- 'use client'
+"use client";
 import {
   Box,
   Button,
@@ -9,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -18,45 +17,37 @@ import Logo from "@/assets/svgs/logo.svg";
 import { loginUser } from "@/service/actions/loginUser";
 import { storeUserInfo } from "@/service/actions/auth.services";
 import { toast } from "sonner";
-import {  useRouter } from "next/navigation";
-
-
-
-
+import { useRouter } from "next/navigation";
 
 type Inputs = {
-  example: string
-  exampleRequired: string
-}
-const Login = () => {
-
-  type Inputs = {
-  email: string;
-  password:string;
+  example: string;
   exampleRequired: string;
-}
+};
+const Login = () => {
+  type Inputs = {
+    email: string;
+    password: string;
+    exampleRequired: string;
+  };
 
-const router= useRouter()
+  const router = useRouter();
 
-const {
-  register,
-  handleSubmit,
-  watch,
-  formState: { errors },
-} = useForm<Inputs>()
-const onSubmit: SubmitHandler<Inputs> = async(data) => {
-   const result = await loginUser(data)
-  if(result?.data?.accessToken){
-    toast.success(result.message)
-       
-   storeUserInfo({accessToken:result?.data?.accessToken})
-   router.push('/')
-  }
-   }
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    console.log(data,'login page data');
+    const result = await loginUser(data);
+    if (result?.data?.accessToken) {
+      toast.success(result.message);
 
-
-
-
+      storeUserInfo({ accessToken: result?.data?.accessToken });
+      router.push("/");
+    }
+  };
 
   return (
     <Container>
@@ -114,7 +105,6 @@ const onSubmit: SubmitHandler<Inputs> = async(data) => {
                       label="Password"
                       id="fullWidth"
                       {...register("password")}
-
                     />
                   </Grid>
                 </Grid>
@@ -124,7 +114,9 @@ const onSubmit: SubmitHandler<Inputs> = async(data) => {
                 </Typography>
 
                 <Box my={2}>
-                  <Button fullWidth type="submit">Loign</Button>
+                  <Button fullWidth type="submit">
+                    Loign
+                  </Button>
                   <Typography mt={1} component={"p"} fontWeight={500}>
                     Don&lsquo;t have an account?
                     <Link href={"/register"}> Create an account</Link>

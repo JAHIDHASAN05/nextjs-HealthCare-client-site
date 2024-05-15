@@ -19,6 +19,7 @@ import {  Toaster, toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/service/actions/loginUser";
 import { storeUserInfo } from "@/service/actions/auth.services";
+import FormProvider from "@/components/Form/FormOfProvider";
 
 const Register = () => {
 

@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -19,26 +19,17 @@ import { storeUserInfo } from "@/service/actions/auth.services";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-type Inputs = {
-  example: string;
-  exampleRequired: string;
-};
+import FormInput from "@/components/Form/FormInput";
+import FormOfProvider from "@/components/Form/FormOfProvider";
+
+
 const Login = () => {
-  type Inputs = {
-    email: string;
-    password: string;
-    exampleRequired: string;
-  };
+
 
   const router = useRouter();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+ 
+  const handleLogin = async (data:FieldValues) => {
     
     const result = await loginUser(data);
     if (result?.data?.accessToken) {
@@ -83,28 +74,30 @@ const Login = () => {
               </Typography>
             </Box>
             <Box>
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <FormOfProvider onSubmit={handleLogin}>
                 <Grid container spacing={2}>
                   <Grid item md={6} mt={2}>
-                    <TextField
+                    <FormInput
+                    name='email'
                       fullWidth
                       variant="outlined"
                       size="small"
                       label="Email"
                       type="email"
                       id="fullWidth"
-                      {...register("email")}
+                    
                     />
                   </Grid>
                   <Grid item md={6} mt={2}>
-                    <TextField
+                    <FormInput
+                      name ='password'
                       fullWidth
                       variant="outlined"
                       size="small"
                       type="password"
                       label="Password"
                       id="fullWidth"
-                      {...register("password")}
+                     
                     />
                   </Grid>
                 </Grid>
@@ -122,7 +115,7 @@ const Login = () => {
                     <Link href={"/register"}> Create an account</Link>
                   </Typography>
                 </Box>
-              </form>
+              </FormOfProvider>
             </Box>
           </Stack>
         </Box>

@@ -4,7 +4,7 @@ import { getFromLocalStorage, removeFromLocalStorage, setToLocalStorage } from "
 
 export const storeUserInfo=({accessToken}:{accessToken:string})=>{
 
-console.log(accessToken, "inside function");
+
    return setToLocalStorage(authKey, accessToken)
 }
 

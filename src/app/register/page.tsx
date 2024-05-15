@@ -44,17 +44,17 @@ const Register = () => {
     formState: { errors },
   } = useForm<IPatientRegisterFormData>()
   const onSubmit: SubmitHandler<IPatientRegisterFormData> = async(values) => {
-    console.log(values);
+  
       const data= modifyPayload(values)
-      console.log(data, 'register data');
+
 
       try{
         const result = await registerPatient(data)
-        console.log(result, "tows5t");
+       
         if(result.success){
           toast.success(result.message)
           const Loginresult = await loginUser({password:values.password , email:result.data.email});
-          console.log(Loginresult,'loging res');
+          
           if (Loginresult?.data?.accessToken) {
             storeUserInfo({ accessToken:Loginresult?.data?.accessToken });
             router.push("/");

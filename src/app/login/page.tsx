@@ -39,7 +39,7 @@ const Login = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data,'login page data');
+    
     const result = await loginUser(data);
     if (result?.data?.accessToken) {
       toast.success(result.message);

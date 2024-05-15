@@ -8,7 +8,7 @@ const Specialties = async () => {
         }
     })
     const {data : specialist }= await res.json()
-    console.log(specialist);
+   
    
     return (
         <Container>

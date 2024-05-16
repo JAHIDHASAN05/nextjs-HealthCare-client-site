@@ -12,7 +12,7 @@ import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Logo from "@/assets/svgs/logo.svg";
 import { loginUser } from "@/service/actions/loginUser";
 import { storeUserInfo } from "@/service/actions/auth.services";
@@ -30,6 +30,7 @@ const validationScemae= z.object({
   password : z.string().min(6, 'please input atleat 6 character')
 })
 const Login = () => {
+  const [error ,setError]= useState('')
 
 
   const router = useRouter();
@@ -38,11 +39,14 @@ const Login = () => {
   const handleLogin = async (data:FieldValues) => {
     
     const result = await loginUser(data);
+    console.log(result);
     if (result?.data?.accessToken) {
       toast.success(result.message);
 
       storeUserInfo({ accessToken: result?.data?.accessToken });
       router.push("/");
+    }else{
+      setError(result.message)
     }
   };
 
@@ -117,6 +121,10 @@ const Login = () => {
                   </Grid>
                 </Grid>
 
+                <Typography component={"p"} textAlign={"start"} >
+                 <span className='text-red-400 ml-2'>{error}</span> 
+              
+                </Typography>
                 <Typography component={"p"} textAlign={"end"}>
                   Forgot password?
                 </Typography>

@@ -21,7 +21,14 @@ import { useRouter } from "next/navigation";
 
 import FormInput from "@/components/Form/FormInput";
 import FormOfProvider from "@/components/Form/FormOfProvider";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Email } from "@mui/icons-material";
 
+const validationScemae= z.object({
+  email : z.string().email('please provide  a valid email'),
+  password : z.string().min(6, 'please input atleat 6 character')
+})
 const Login = () => {
 
 
@@ -73,7 +80,15 @@ const Login = () => {
               </Typography>
             </Box>
             <Box>
-              <FormOfProvider onSubmit={handleLogin}>
+              <FormOfProvider 
+              onSubmit={handleLogin} 
+              resolver={zodResolver(validationScemae)}
+              defaultValues={{
+                email:'',
+                password:''
+                }
+              }
+              >
                 <Grid container spacing={2}>
                   <Grid item md={6} mt={2}>
                     <FormInput
@@ -96,6 +111,7 @@ const Login = () => {
                       type="password"
                       label="Password"
                       id="fullWidth"
+                   
                      
                     />
                   </Grid>

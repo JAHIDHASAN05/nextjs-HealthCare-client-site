@@ -21,7 +21,21 @@ import { loginUser } from "@/service/actions/loginUser";
 import { storeUserInfo } from "@/service/actions/auth.services";
 import FormOfProvider from "@/components/Form/FormOfProvider";
 import FormInput from "@/components/Form/FormInput";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+
+const patientValidationShcema = z.object({ 
+    email:z.string().email('please provide a valid email'),
+    name:z.string().min(1,' please enter your name'),
+    address:z.string().min(1, "please enter your address"),
+    contactNumber:z.string().regex(/^\d{11}/,'please enter a valid phone number')
+})
+
+const registerValidationSchema=z.object({
+  password:z.string().min(6,"password must be atleast 6 character"),
+  patient:patientValidationShcema
+})
 
 const Register = () => {
 
@@ -31,6 +45,7 @@ const Register = () => {
  
   
       const data= modifyPayload(values)
+      console.log(values);
 
 
       try{
@@ -92,12 +107,20 @@ const Register = () => {
               </Typography>
             </Box>
             <Box>
-             <FormOfProvider onSubmit={handleRegister}>
+             <FormOfProvider onSubmit={handleRegister}  resolver={zodResolver(registerValidationSchema)} 
+             defaultValues={{               
+               password:'',
+               patient:{
+                  email:'',
+                  name:'',
+                  address:'',
+                  contactNumber:"",
+                }
+             }}>
              <Grid container spacing={2}>
                 <Grid item md={12} mt={1}>
                   <FormInput
-                    name="patient.name"
-                    required={true}
+                    name="patient.name"                  
                     variant="outlined"
                     size="small"
                     label="Name"
@@ -106,7 +129,7 @@ const Register = () => {
                 </Grid>
                 <Grid item md={6} mt={1}>
                   <FormInput
-                       required={true}
+                      
                     variant="outlined"
                     size="small"
                     label="Email"
@@ -118,11 +141,11 @@ const Register = () => {
                 </Grid>
                 <Grid item md={6} mt={1}>
                   <FormInput
-                       required={true}
+                      
                     variant="outlined"
                     size="small"
                     type="password"
-                    label="Password"
+                    label="password"
                     id="fullWidth"
                     name="password"
 
@@ -130,7 +153,7 @@ const Register = () => {
                 </Grid>
                 <Grid item md={6} mt={1}>
                   <FormInput
-                    required={true}
+                  
                     variant="outlined"
                     size="small"
                     type="tel"
@@ -147,7 +170,7 @@ const Register = () => {
                     label="Address"
                     id="fullWidth"
                     name="patient.address"
-                       required={true}
+                      
 
                   />
                 </Grid>

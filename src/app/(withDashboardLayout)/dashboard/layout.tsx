@@ -1,10 +1,11 @@
-import React from 'react';
+import DashboardDrawer from '@/components/Dashboard/DashboardDrawer/DashboardDrawer';
 
-const DashboardLayout = ({children}) => {
+
+const DashboardLayout = ({children}:{children:React.ReactNode}) => {
   return (
-    <>
-      dash board lay out
-    </>
+    <DashboardDrawer>
+      {children}
+    </DashboardDrawer>
   );
 };
 

@@ -12,45 +12,30 @@ import Image from "next/image";
 import React from "react";
 import Logo from "@/assets/svgs/logo.svg";
 import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form"
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerPatient } from "@/service/actions/registerPatient";
 import {  Toaster, toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/service/actions/loginUser";
 import { storeUserInfo } from "@/service/actions/auth.services";
-import FormProvider from "@/components/Form/FormOfProvider";
+import FormOfProvider from "@/components/Form/FormOfProvider";
+import FormInput from "@/components/Form/FormInput";
+
 
 const Register = () => {
 
   const router= useRouter()
 
-  interface IPatientData {
-    name:string;
-    email: string;
-    contactNumber: string;
-    address: string
-  }
-
-
-  interface IPatientRegisterFormData {
-    password :string;
-    patient:IPatientData;
-  }
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<IPatientRegisterFormData>()
-  const onSubmit: SubmitHandler<IPatientRegisterFormData> = async(values) => {
+  const handleRegister = async(values:FieldValues) => {
+ 
   
       const data= modifyPayload(values)
 
 
       try{
         const result = await registerPatient(data)
+        console.log(result,"from refister page")
        
         if(result.success){
           toast.success(result.message)
@@ -107,62 +92,62 @@ const Register = () => {
               </Typography>
             </Box>
             <Box>
-             <form onSubmit={handleSubmit(onSubmit)}>
+             <FormOfProvider onSubmit={handleRegister}>
              <Grid container spacing={2}>
                 <Grid item md={12} mt={1}>
-                  <TextField
-                    fullWidth
+                  <FormInput
+                    name="patient.name"
+                    required={true}
                     variant="outlined"
                     size="small"
                     label="Name"
                     id="fullWidth"
-                    {...register("patient.name")}
                   />
                 </Grid>
                 <Grid item md={6} mt={1}>
-                  <TextField
-                    fullWidth
+                  <FormInput
+                       required={true}
                     variant="outlined"
                     size="small"
                     label="Email"
                     type="email"
                     id="fullWidth"
-                    {...register("patient.email")}
+                    name="patient.email"
 
                   />
                 </Grid>
                 <Grid item md={6} mt={1}>
-                  <TextField
-                    fullWidth
+                  <FormInput
+                       required={true}
                     variant="outlined"
                     size="small"
                     type="password"
                     label="Password"
                     id="fullWidth"
-                    {...register("password")}
+                    name="password"
 
                   />
                 </Grid>
                 <Grid item md={6} mt={1}>
-                  <TextField
-                    fullWidth
+                  <FormInput
+                    required={true}
                     variant="outlined"
                     size="small"
                     type="tel"
                     label="Contact-Number"
                     id="fullWidth"
-                    {...register("patient.contactNumber")}
+                    name="patient.contactNumber"
 
                   />
                 </Grid>
                 <Grid item md={6} mt={1}>
-                  <TextField
-                    fullWidth
+                  <FormInput               
                     variant="outlined"
                     size="small"
                     label="Address"
                     id="fullWidth"
-                    {...register("patient.address")}
+                    name="patient.address"
+                       required={true}
 
                   />
                 </Grid>
@@ -175,7 +160,7 @@ const Register = () => {
                   <Link href={"/login"}>Login</Link>
                 </Typography>
               </Box>
-             </form>
+             </FormOfProvider>
             </Box>
           </Stack>
         </Box>

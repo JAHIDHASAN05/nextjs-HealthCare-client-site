@@ -2,7 +2,9 @@ import React from 'react';
 
 const AdminPage = () => {
     return (
-        <div>admin page of</div>
+        <div>
+          <h1 className='text-4xl font-bold'>admin page of</h1>
+        </div>
   );
 };
 

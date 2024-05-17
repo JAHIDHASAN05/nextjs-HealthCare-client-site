@@ -8,10 +8,10 @@ import { usePathname } from "next/navigation";
 
 interface ISidebarItemProps {
     item :DrawerItem,
-    index:number,
+   
 }
 
-const SidebarItem = ({ item, }:ISidebarItemProps) => {
+const SidebarItem = ({ item }:ISidebarItemProps) => {
     const LinkPath= `/dashboard/${item.path}`
     const pathName= usePathname()
   

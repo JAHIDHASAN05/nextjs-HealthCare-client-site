@@ -7,8 +7,19 @@ import { link } from "fs";
 import DrawerItems from "@/utils/DrawerItems";
 import { UserRole } from "@/types";
 import SidebarItem from "./SidebarItem";
+import { getUserInfo } from "@/service/actions/auth.services";
+import { useEffect, useState } from "react";
 
 const SideBar = () => {
+
+  const [userRole, setUserRole]= useState('')
+
+  useEffect(()=>{
+  const {role}= getUserInfo();  
+  setUserRole(role)
+  
+},[])
+
   
     return (
         <Box>
@@ -19,7 +30,8 @@ const SideBar = () => {
             </Stack>
             
             <List          >
-            {DrawerItems('admin' as UserRole).map((item, index) => (
+            {DrawerItems(userRole as UserRole).map((item, index) => (
+
              <SidebarItem item={item} key={index} />    
              
              ))}

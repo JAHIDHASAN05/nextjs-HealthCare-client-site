@@ -1,41 +1,15 @@
 import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Toolbar, Typography } from "@mui/material";
-import MailIcon from '@mui/icons-material/Mail';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
 import { link } from "fs";
+import DrawerItems from "@/utils/DrawerItems";
+import { UserRole } from "@/types";
+import SidebarItem from "./SidebarItem";
 
 const SideBar = () => {
-    const drawer = (
-        <Box>         
-          <List          >
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      );
+  
     return (
         <Box>
            
@@ -44,8 +18,12 @@ const SideBar = () => {
                 <Typography>Ph Health Care</Typography>
             </Stack>
             
-
-           {drawer} 
+            <List          >
+            {DrawerItems('admin' as UserRole).map((item, index) => (
+             <SidebarItem item={item} key={index} />    
+             
+             ))}
+          </List>
         </Box>
     );
 };

@@ -64,7 +64,7 @@ export default function DashboardDrawer({children}:{children:React.ReactNode}) {
           </IconButton>
           <Box>
           <Typography variant="h6" noWrap component="div"sx={{
- color:"primary.main"
+           color:"primary.main"
           }}>
             Hi, I am jahid
           </Typography>

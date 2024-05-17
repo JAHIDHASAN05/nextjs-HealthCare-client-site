@@ -2,10 +2,9 @@ import React from 'react';
 
 const AdminPage = () => {
     return (
-        <div>
-            AdminPage dfdf
-        </div>
-    );
+        <div>admin page of</div>
+  );
 };
+
 
 export default AdminPage;

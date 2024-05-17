@@ -63,6 +63,7 @@ Instance.interceptors.response.use(
     // Do something with response error
 
 
+    
     const responseObject :IGenericErorrResponse ={
         statusCode: error?.response?.data?.statusCode ||500,
         message:error?.response?.data?.message || 'something went wrong',

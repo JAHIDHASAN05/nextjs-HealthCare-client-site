@@ -59,7 +59,7 @@ import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
                     },
                     {
                         title:'Reviews',
-                        path:`${role}/Reviews`,
+                        path:`${role}/reviews`,
                         icon: MedicalInformationIcon
                     },
 

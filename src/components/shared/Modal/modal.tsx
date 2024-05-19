@@ -61,9 +61,9 @@ export default function Modal({title, children, setIsOpenModal, IsModalOpen}:TPr
           <Box>{children}</Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          {/* <Button autoFocus onClick={handleClose}>
             Save changes
-          </Button>
+          </Button> */}
         </DialogActions>
       </BootstrapDialog>
     </React.Fragment>

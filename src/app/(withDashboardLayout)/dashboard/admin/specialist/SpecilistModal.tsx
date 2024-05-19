@@ -32,7 +32,7 @@ const SpecilistModal = ({ IsModalOpen, setIsOpenModal }: TProps) => {
                 ></FormInput>       
             </Grid>
             <Grid item md={6}>
-                <FormFileUploader            
+                <FormFileUploader name="file" label="upload file"            
                 ></FormFileUploader>       
             </Grid>
         </Grid>

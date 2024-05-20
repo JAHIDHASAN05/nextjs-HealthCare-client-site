@@ -9,12 +9,10 @@ type TFormZodResolverConfig={
   resolver?: any;
   defaultValues ?: Record<string, any>
 }
-
 type TFormProps = {
   children: React.ReactNode;
   onSubmit: SubmitHandler<FieldValues>;
 } & TFormZodResolverConfig;
-
 
 const FormOfProvider = ({ children, onSubmit , resolver, defaultValues}: TFormProps) => {
     const zodResolverConfig:TFormZodResolverConfig={}

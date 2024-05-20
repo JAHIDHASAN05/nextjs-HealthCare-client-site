@@ -17,16 +17,12 @@ type TProps = {
 
 const SpecilistModal = ({ IsModalOpen, setIsOpenModal }: TProps) => {
   const [createSpecility] = useCreateSpecilityMutation();
-
   const handldeSubmit = async (values: FieldValues) => {
-    const data = modifyPayload(values);  
-
-
-    
+    const data = modifyPayload(values);      
 
     try {
       const res = await createSpecility(data).unwrap();
-      console.log("response", res);
+      console.log("response", res);    
     } catch (error: any) {
       console.log(error.message);
     }

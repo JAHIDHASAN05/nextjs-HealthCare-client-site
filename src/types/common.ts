@@ -1,6 +1,7 @@
 import { USER_ROLE } from "@/constans/role";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
+import exp from "constants";
 
 export type IMeta ={
   page :number;
@@ -20,3 +21,6 @@ export interface DrawerItem{
   icon?:OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {muiName:string};
   child? :DrawerItem[]
 }
+
+
+export const Gender= ['MALE', 'FEMALE']

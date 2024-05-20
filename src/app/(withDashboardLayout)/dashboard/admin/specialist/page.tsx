@@ -16,8 +16,7 @@ const SpecialistPage = () => {
         <Stack  direction={'row'} justifyContent={'space-between'}>
           
           <TextField    placeholder='Search Spacilaist'  /> 
-            <SpecilistModal IsModalOpen={IsModalOpen} setIsOpenModal={setIsOpenModal}/>
-        
+            <SpecilistModal IsModalOpen={IsModalOpen} setIsOpenModal={setIsOpenModal}/>        
             <Button onClick={()=>setIsOpenModal(!IsModalOpen)}  >Create Specialist</Button>
          
         </Stack>

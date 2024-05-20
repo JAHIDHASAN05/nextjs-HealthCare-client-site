@@ -1,5 +1,6 @@
 import { axiosBaseQuery } from '@/helpers/axious/axiosBaseQuery'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { tagTypesList } from '../tag-types/tagTypes'
 
 
 export const baseApi = createApi({
@@ -8,4 +9,6 @@ export const baseApi = createApi({
   endpoints: (builder) => ({
 
   }),
+
+  tagTypes : tagTypesList,
 })

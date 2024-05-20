@@ -4,8 +4,7 @@ import { baseApi } from "./baseApi";
 const specialitiesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createSpecility: build.mutation({
-      query: (data) => {
-        console.log(data, "inside createting");
+      query: (data) => {        
         return {
           url: "/specialties",
           method: "POST",

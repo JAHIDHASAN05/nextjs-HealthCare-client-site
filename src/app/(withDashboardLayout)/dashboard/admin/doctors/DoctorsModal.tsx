@@ -2,13 +2,33 @@ import FormInput from "@/components/Form/FormInput";
 import FormOfProvider from "@/components/Form/FormOfProvider";
 import FormSelectorInput from "@/components/Form/FormSelectorInput";
 import FullScreenModal from "@/components/shared/Modal/FullScreenModal";
+import { useCreateDoctorsMutation } from "@/redux/api/doctorsApi";
 import { Gender } from "@/types";
+import { modifyPayload } from "@/utils/modifyPayload";
 import { Fullscreen } from "@mui/icons-material";
 import { Box, Button, Grid, Stack, TextField } from "@mui/material";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
-  const handleSubmit = (values: FieldValues) => {
+
+    const [createDoctors]= useCreateDoctorsMutation()
+  const handleSubmit = async(values: FieldValues) => {
+
     console.log(values);
+
+    values.doctor.experience= Number(values.doctor.experience)
+    values.doctor.apointmentFee= Number(values.doctor.apointmentFee)
+    const formData= modifyPayload(values)
+    try {
+        const  res= await  createDoctors(formData).unwrap()
+        if(res?.id){
+            toast.success('doctor created succesfully')
+            setIsOpenModal(false)
+        }
+        
+    } catch (error) {
+        console.log(error);
+    }
   };
   return (
     <FullScreenModal setIsOpenModal={setIsOpenModal} IsModalOpen={IsModalOpen}>
@@ -27,7 +47,7 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
         >
           <Grid item  xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.name"
+              name="doctor.name"
               label="your name"
               fullWidth={true}
               placeholder="Your name"
@@ -37,7 +57,7 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.email"
+              name="doctor.email"
               label="Your Email"
               fullWidth={true}
               placeholder="Your Eamil"
@@ -57,7 +77,7 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.contactNumber"
+              name="doctor.contactNumber"
               label="contact-number"
               fullWidth={true}
               placeholder="contact-number"
@@ -67,7 +87,7 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.registrationNumber"
+              name="doctor.registrationNumber"
               label="registration-number "
               fullWidth={true}
               placeholder="registration-number"
@@ -77,7 +97,7 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.Address"
+              name="doctor.address"
               label="address"
               fullWidth={true}
               placeholder="address"
@@ -87,7 +107,7 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.designation"
+              name="doctor.designation"
               label="designation"
               fullWidth={true}
               placeholder="designation"
@@ -97,7 +117,7 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.apointmentFee"
+              name="doctor.apointmentFee"
               label="apointment-fee"
               fullWidth={true}
               placeholder="apointment-fee"
@@ -107,7 +127,7 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.experience"
+              name="doctor.experience"
               label="experience"
               fullWidth={true}
               placeholder="experience"
@@ -116,12 +136,12 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
-          <FormSelectorInput items={Gender} name='doctors.gender'  size="small" label='select your gender' placeholder='select your gender' />
+          <FormSelectorInput items={Gender} name='doctor.gender'  size="small" label='select your gender' placeholder='select your gender' />
 
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.currentWorkingPlace"
+              name="doctor.currentWorkingPlace"
               label="currentWorkingPlace"
               fullWidth={true}
               placeholder="Your name"
@@ -131,10 +151,10 @@ const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <FormInput
-              name="doctors.qualification"
-              label="your name"
+              name="doctor.qualification"
+              label="qualification"
               fullWidth={true}
-              placeholder="Your name"
+              placeholder="qualification"
               type="text"
               size="small"
             />

@@ -9,6 +9,7 @@ import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 
 type TProps = {
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,10 @@ const SpecilistModal = ({ IsModalOpen, setIsOpenModal }: TProps) => {
 
     try {
       const res = await createSpecility(data).unwrap();
+      if(res?.id){
+        toast.success('specility created sucess')
+        setIsOpenModal(false)
+      }
           
     } catch (error: any) {
       console.log(error.message);

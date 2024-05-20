@@ -18,11 +18,12 @@ type TProps = {
 const SpecilistModal = ({ IsModalOpen, setIsOpenModal }: TProps) => {
   const [createSpecility] = useCreateSpecilityMutation();
   const handldeSubmit = async (values: FieldValues) => {
+    console.log(values);
     const data = modifyPayload(values);      
 
     try {
       const res = await createSpecility(data).unwrap();
-      console.log("response", res);    
+          
     } catch (error: any) {
       console.log(error.message);
     }
@@ -36,7 +37,7 @@ const SpecilistModal = ({ IsModalOpen, setIsOpenModal }: TProps) => {
       <FormOfProvider onSubmit={handldeSubmit}>
         <Grid container spacing={2}>
           <Grid item md={6}>
-            <FormInput name="data.title" label="title" size="small"></FormInput>
+            <FormInput name="title" label="title" size="small"></FormInput>
           </Grid>
           <Grid item md={6}>
             <FormFileUploader

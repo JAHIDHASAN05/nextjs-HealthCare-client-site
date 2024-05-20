@@ -22,11 +22,19 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+
+type TPropsFullScreenModal={
+  IsModalOpen:boolean;
+  setIsOpenModal:React.Dispatch<React.SetStateAction<boolean>>,
+  children:React.ReactNode
+
+}
+
 export default function FullScreenModal({
   IsModalOpen,
   setIsOpenModal,
   children,
-}) {
+}:TPropsFullScreenModal) {
   const handleClose = () => {
     setIsOpenModal(false);
   };

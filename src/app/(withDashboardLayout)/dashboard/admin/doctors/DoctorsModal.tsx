@@ -12,9 +12,7 @@ import { toast } from "sonner";
 const DoctorsModal = ({ IsModalOpen, setIsOpenModal }: any) => {
 
     const [createDoctors]= useCreateDoctorsMutation()
-  const handleSubmit = async(values: FieldValues) => {
-
-    console.log(values);
+  const handleSubmit = async(values: FieldValues) => {    
 
     values.doctor.experience= Number(values.doctor.experience)
     values.doctor.apointmentFee= Number(values.doctor.apointmentFee)

@@ -20,9 +20,6 @@ import { toast } from "sonner";
 
 
 const SpecialistPage = () => {
-
-
-
   const [deleteSpecility]= useDeleteSpecilityMutation({})
 
   const handleDelete = async (id: string) => {

@@ -22,11 +22,8 @@ import { toast } from "sonner";
 const SpecialistPage = () => {
   const [deleteSpecility]= useDeleteSpecilityMutation({})
 
-  const handleDelete = async (id: string) => {
-    console.log(id);
-    const res=  await deleteSpecility(id).unwrap()
-    console.log(res);
-
+  const handleDelete = async (id: string) => {  
+    const res=  await deleteSpecility(id).unwrap()    
     if(res?.id){
       toast.success("Deleted succesfully")
     }

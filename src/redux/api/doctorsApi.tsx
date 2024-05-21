@@ -1,3 +1,4 @@
+import { IMeta } from "@/types"
 import { baseApi } from "./baseApi"
 
 
@@ -13,8 +14,24 @@ const doctorsApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getAllDoctors: build.query({
+      query: (arg:Record<string, any>) => {
+        return {
+            url:'/doctor',
+            method :'GET',  
+            params : arg         
+        }
+      },
+      transformResponse:(response , meta:IMeta)=>{
+       return {
+        doctors:response,
+        meta,
+       }
+      }
+    }),
   }),
   overrideExisting: false,
+
 })
 
-export const { useCreateDoctorsMutation } = doctorsApi;
+export const { useCreateDoctorsMutation, useGetAllDoctorsQuery } = doctorsApi;

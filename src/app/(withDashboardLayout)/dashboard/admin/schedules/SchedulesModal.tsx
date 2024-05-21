@@ -5,6 +5,7 @@ import FormOfProvider from "@/components/Form/FormOfProvider";
 import FormTimePicker from "@/components/Form/FormTimePicker";
 import Modal from "@/components/shared/Modal/modal";
 import DateFormmater from "@/utils/DateFormmater";
+import TimeFormatter from "@/utils/TimeFormatter";
 import {  Button, Grid } from "@mui/material";
 import React from "react";
 import { FieldValues } from "react-hook-form";
@@ -17,10 +18,13 @@ interface IProps {
 }
 
 const SchedulesModal = ({ setIsOpenModal, IsOpenModal }:IProps) => {
-  const handleSubmit = (values: FieldValues) => {
+  const handleSubmit = async(values: FieldValues) => {
+    console.log(values, 'jahid');
    
     values.startDate= DateFormmater(values.startDate)
+    values.startTime= TimeFormatter(values.startTime)
     values.endDate= DateFormmater(values.endDate)
+    values.endTime= TimeFormatter(values.endTime)
     console.log(values);
     setIsOpenModal(false);
   };

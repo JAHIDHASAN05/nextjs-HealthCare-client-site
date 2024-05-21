@@ -1,5 +1,7 @@
 import { IMeta } from "@/types"
 import { baseApi } from "./baseApi"
+import { tagTypes } from "../tag-types/tagTypes"
+import { url } from "inspector"
 
 
 const doctorsApi = baseApi.injectEndpoints({
@@ -13,6 +15,7 @@ const doctorsApi = baseApi.injectEndpoints({
             data:data
         }
       },
+     invalidatesTags: [tagTypes?.doctor]
     }),
     getAllDoctors: build.query({
       query: (arg:Record<string, any>) => {
@@ -27,11 +30,22 @@ const doctorsApi = baseApi.injectEndpoints({
         doctors:response,
         meta,
        }
-      }
+      },
+      providesTags:[tagTypes.doctor]
     }),
+    deleteDoctor: build.mutation({
+      query: (id) =>{
+        return{
+          url :`/doctor/soft/${id}`,
+          method:"DELETE"
+        }
+      },
+      invalidatesTags: [tagTypes?.doctor]
+    })
+
   }),
-  overrideExisting: false,
+  
 
 })
 
-export const { useCreateDoctorsMutation, useGetAllDoctorsQuery } = doctorsApi;
+export const { useCreateDoctorsMutation, useGetAllDoctorsQuery, useDeleteDoctorMutation } = doctorsApi;

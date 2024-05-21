@@ -1,11 +1,11 @@
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { SxProps } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 
-interface IDatePickerProps {
+interface ITimePickerProps {
   name: string;
   size?: "small" | "medium";
   required?: boolean;
@@ -13,14 +13,14 @@ interface IDatePickerProps {
   sx?: SxProps;
   label?:string
 }
-const FormDatePicker = ({
+const FormTimePicker = ({
   name,
   size = "small",
   required,
   fullWidth = true,
   sx,
   label
-}: IDatePickerProps) => {
+}: ITimePickerProps) => {
 
     const {control}=useFormContext()
   return (
@@ -32,11 +32,10 @@ const FormDatePicker = ({
       render={({field:{onChange, value, ...field}}) => {
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              disablePast
+            <TimePicker              
               timezone="system"
               label={label}
-              onChange={(date)=> onChange(date)}
+              onChange={(time)=> onChange(time)}
               value={value || Date.now()}
 
               slotProps={{
@@ -60,4 +59,4 @@ const FormDatePicker = ({
   );
 };
 
-export default FormDatePicker;
+export default FormTimePicker;
